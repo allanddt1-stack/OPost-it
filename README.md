@@ -1,93 +1,95 @@
 # Post-it
 
-Petite app de listes de tâches façon *Stickies*, pour **macOS, Windows et Linux**. Chaque note est une fenêtre colorée posée sur le bureau, avec ses tâches à cocher, un minuteur pomodoro et un lien avec ton agenda.
+**English** · [Français](README.fr.md)
 
-*A tiny sticky-note to-do app for macOS, Windows and Linux, with checklists, a pomodoro timer and calendar export. The interface is in French.*
+A small *Stickies*-style to-do app for **macOS, Windows and Linux**. Each note is a colored window on your desktop, with its own checklist, a pomodoro timer and a link to your calendar.
+
+> The app's interface is in French. Menus and buttons are short, and the shortcuts below work the same in any language.
 
 ### macOS
 
-![Post-it sur macOS : un projet avec des rubriques et des tâches datées, une liste de lectures et une liste de courses épinglée](docs/mac-notes.png)
+![Post-it on macOS: a project with sections and dated tasks, a reading list and a pinned shopping list](docs/mac-notes.png)
 
 <p align="center">
-  <img src="docs/mac-collapsed.png" alt="Note épinglée repliée en barre quand on passe à une autre application" width="300">
-  <img src="docs/mac-date.png" alt="Réglage de la date : rappel à cocher ou rendez-vous, début et fin" width="350">
+  <img src="docs/mac-collapsed.png" alt="A pinned note collapsed into a thin bar while another app is in front" width="300">
+  <img src="docs/mac-date.png" alt="Date settings: reminder to tick off or appointment, with start and end" width="350">
 </p>
 
-### Windows et Linux
+### Windows and Linux
 
-![Post-it sous Windows et Linux : trois notes avec rubriques, mise en forme et dates](docs/desktop-notes.png)
+![Post-it on Windows and Linux: three notes with sections, formatting and dates](docs/desktop-notes.png)
 
 <p align="center">
-  <img src="docs/desktop-collapsed.png" alt="Note épinglée repliée en barre quand on passe à une autre application" width="310">
-  <img src="docs/desktop-date.png" alt="Fenêtre de choix de la date de début et de fin d'une tâche" width="390">
+  <img src="docs/desktop-collapsed.png" alt="A pinned note collapsed into a thin bar while another app is in front" width="310">
+  <img src="docs/desktop-date.png" alt="Window for choosing a task's start and end date" width="390">
 </p>
 
-<sub>Captures faites en mode démo, avec des notes fictives.</sub>
+<sub>Screenshots taken in demo mode, with made-up notes.</sub>
 
-Le dépôt contient deux versions, avec les mêmes idées mais un code différent :
+The repository holds two versions that share the same ideas but not the same code:
 
 | | macOS | Windows / Linux |
 |---|---|---|
-| Dossier | [`macos/`](macos) | [`desktop/`](desktop) |
-| Technologie | Swift (SwiftUI + AppKit) | Python + Qt (PySide6) |
-| Agenda | Synchronisé avec Calendrier et Rappels, dans les deux sens | Export `.ics` vers n'importe quel agenda (Outlook, Thunderbird, Google…) |
+| Folder | [`macos/`](macos) | [`desktop/`](desktop) |
+| Technology | Swift (SwiftUI + AppKit) | Python + Qt (PySide6) |
+| Calendar | Two-way sync with Apple Calendar and Reminders | `.ics` export to any calendar app (Outlook, Thunderbird, Google…) |
 
-## Fonctionnalités
+## Features
 
-- **Notes flottantes** : six couleurs, redimensionnables, enregistrées automatiquement.
-- **Punaise** : garde une note au premier plan. Quand tu passes à une autre app, les notes épinglées se replient en une fine barre qui garde le titre et le pomodoro.
-- **Transparence** réglable note par note (100 % à 40 %).
-- **Rubriques** : regroupe les tâches sous des intitulés repliables (raccourci, ou `# Nom` dans un champ d'ajout).
-- **Mise en forme Markdown** : `**gras**`, `*italique*`, `~~barré~~`, `` `code` ``, `[lien](https://…)`. Les adresses web collées deviennent cliquables. Par sécurité, seuls les liens `http`, `https` et `mailto` sont cliquables, et la vraie destination d'un lien s'affiche quand son texte ne la montre pas.
-- **Pomodoro** par note, avec durées de travail et de pause réglables.
-- **Dates** : chaque tâche peut recevoir un début et une fin, ou être marquée « toute la journée ».
-  - Sur macOS, elle devient au choix un **rappel à cocher** ou un **rendez-vous** dans Calendrier, synchronisé dans les deux sens.
-  - Sur Windows et Linux, un fichier `.ics` s'ouvre dans ton agenda par défaut, avec une alerte. Post-it affiche aussi une notification à l'heure de début.
+- **Floating notes**: six colors, resizable, saved automatically.
+- **Pin**: keeps a note above other windows. When you switch to another app, pinned notes collapse into a thin bar that still shows the title and the pomodoro.
+- **Transparency**, set note by note (100% to 40%).
+- **Sections**: group tasks under collapsible headings (keyboard shortcut, or type `# Name` in an "add task" field).
+- **Markdown formatting**: `**bold**`, `*italic*`, `~~strikethrough~~`, `` `code` ``, `[link](https://…)`. Pasted web addresses become clickable. For safety, only `http`, `https` and `mailto` links can be clicked, and a link's real destination is shown next to it when its text doesn't reveal it.
+- **Pomodoro** timer in every note, with adjustable work and break lengths.
+- **Dates**: any task can get a start and an end, or be marked "all day".
+  - On macOS, it becomes either a **reminder to tick off** or an **appointment** in Calendar, synced both ways.
+  - On Windows and Linux, an `.ics` file opens in your default calendar app, with an alert. Post-it also shows a notification at the start time.
 
-### Raccourcis
+### Shortcuts
 
 | Action | macOS | Windows / Linux |
 |---|---|---|
-| Nouvelle note | ⌘N | Ctrl+N |
-| Nouvelle rubrique | ⇧⌘N | Ctrl+Maj+N |
-| Couleur | ⌘1 à ⌘6 | Ctrl+1 à Ctrl+6 |
-| Gras / italique | ⌘B / ⌘I | Ctrl+B / Ctrl+I |
-| Barré / code | ⇧⌘X / ⌘E | Ctrl+Maj+X / Ctrl+E |
-| Lien | ⌘K | Ctrl+K |
-| Supprimer la note | ⌘W | Ctrl+W |
+| New note | ⌘N | Ctrl+N |
+| New section | ⇧⌘N | Ctrl+Shift+N |
+| Color | ⌘1 to ⌘6 | Ctrl+1 to Ctrl+6 |
+| Bold / italic | ⌘B / ⌘I | Ctrl+B / Ctrl+I |
+| Strikethrough / code | ⇧⌘X / ⌘E | Ctrl+Shift+X / Ctrl+E |
+| Link | ⌘K | Ctrl+K |
+| Delete note | ⌘W | Ctrl+W |
 
 ## Installation
 
 ### macOS
 
-Prérequis : macOS 14 (Sonoma) ou plus récent, et les outils de développement d'Apple (`xcode-select --install`, gratuits, sans Xcode complet).
+Requirements: macOS 14 (Sonoma) or later, and Apple's command line developer tools (`xcode-select --install`: free, no need for the full Xcode).
 
 ```bash
-git clone https://github.com/allanddt1-stack/opost-it.git
-cd opost-it/macos
+git clone https://github.com/allanddt1-stack/OPost-it.git
+cd OPost-it/macos
 ./install.sh
 ```
 
-Le script compile l'app, l'installe dans `/Applications` et la lance. Elle est signée localement et n'est pas notariée par Apple.
+The script builds the app, installs it in `/Applications` and launches it. The app is signed locally and is not notarized by Apple.
 
 ### Windows
 
-Télécharge `Post-it.exe` dans la page **Releases** du dépôt, puis lance-le. Windows SmartScreen peut avertir que l'éditeur est inconnu, car l'exécutable n'est pas signé : clique sur « Informations complémentaires », puis « Exécuter quand même ».
+Download `Post-it.exe` from the repository's **Releases** page and run it. Windows SmartScreen may warn that the publisher is unknown, because the executable isn't signed: click "More info", then "Run anyway".
 
-Pour le lancer au démarrage : `Win+R`, tape `shell:startup`, puis place un raccourci vers `Post-it.exe` dans ce dossier.
+To start it automatically: press `Win+R`, type `shell:startup`, and put a shortcut to `Post-it.exe` in that folder.
 
 ### Linux
 
-Télécharge `Post-it-Linux.tar.gz` dans **Releases**, puis :
+Download `Post-it-Linux.tar.gz` from **Releases**, then:
 
 ```bash
 tar -xzf Post-it-Linux.tar.gz
-./install-linux.sh      # installe dans ~/.local/bin et ajoute Post-it au menu des applications
+./install-linux.sh      # installs into ~/.local/bin and adds Post-it to the applications menu
 ```
 
-Certaines distributions minimales ont besoin de `libxcb-cursor0` (Debian/Ubuntu : `sudo apt install libxcb-cursor0`).
+Some minimal distributions need `libxcb-cursor0` (Debian/Ubuntu: `sudo apt install libxcb-cursor0`).
 
-### Lancer depuis les sources (Windows / Linux / macOS)
+### Running from source (Windows / Linux / macOS)
 
 ```bash
 cd desktop
@@ -95,38 +97,38 @@ pip install -r requirements.txt
 python postit.py
 ```
 
-## Mode démo
+## Demo mode
 
-Pour essayer l'app ou faire des captures d'écran sans montrer tes vraies notes, lance-la avec `--demo`. Elle ouvre alors trois notes fictives. Tes données ne sont ni lues ni modifiées, et rien n'est envoyé à l'agenda.
+To try the app, or take screenshots without showing your real notes, start it with `--demo`. It opens three made-up notes. Your own data is neither read nor modified, and nothing is sent to your calendar.
 
 ```bash
-open -n -a Post-it --args --demo      # macOS (peut tourner à côté de ta Post-it habituelle)
-python postit.py --demo               # Windows / Linux, depuis le dossier desktop/
-Post-it.exe --demo                    # Windows, exécutable téléchargé
+open -n -a Post-it --args --demo      # macOS (can run alongside your usual Post-it)
+python postit.py --demo               # Windows / Linux, from the desktop/ folder
+Post-it.exe --demo                    # Windows, downloaded executable
 ```
 
-Sur macOS, [`macos/capture-demo.command`](macos/capture-demo.command) refait les captures de ce README d'un double-clic : l'app ouvre ses notes de démonstration, enregistre une image de chaque fenêtre dans `~/Desktop/Post-it-captures`, puis se ferme.
+On macOS, [`macos/capture-demo.command`](macos/capture-demo.command) recreates this README's screenshots with a double-click: the app opens its demo notes, saves an image of each window to `~/Desktop/Post-it-captures`, then quits.
 
-## Compilation automatique
+## Automatic builds
 
-Le fichier [`.github/workflows/build.yml`](.github/workflows/build.yml) fait compiler par GitHub les versions Windows et Linux à chaque envoi sur `main`. Elles sont téléchargeables dans l'onglet **Actions**. Pour publier une version dans **Releases** :
+[`.github/workflows/build.yml`](.github/workflows/build.yml) has GitHub build the Windows and Linux versions on every push to `main`; they can be downloaded from the **Actions** tab. To publish a version on the **Releases** page:
 
 ```bash
 git tag v1.0
 git push --tags
 ```
 
-## Données et confidentialité
+## Data and privacy
 
-- Les notes sont enregistrées en local dans un fichier `notes.json`, lisible par ton seul compte et non chiffré :
-  - macOS : `~/Library/Application Support/Post-it/`
-  - Windows : `%APPDATA%\Post-it\Post-it\`
-  - Linux : `~/.local/share/Post-it/Post-it/`
-- L'app ne se connecte jamais à Internet.
-- Sur macOS, les tâches datées sont copiées dans ton calendrier et ta liste de rappels par défaut, qui se synchronisent avec iCloud. Vérifie que ces calendriers ne sont pas partagés si tes tâches sont privées.
+- Notes are stored locally in a `notes.json` file, readable only by your user account and not encrypted:
+  - macOS: `~/Library/Application Support/Post-it/`
+  - Windows: `%APPDATA%\Post-it\Post-it\`
+  - Linux: `~/.local/share/Post-it/Post-it/`
+- The app never connects to the internet.
+- On macOS, dated tasks are copied to your default calendar and reminders list, which sync with iCloud. If your tasks are private, check that those calendars aren't shared.
 
-## Licence
+## License
 
 [MIT](LICENSE) © 2026 Allan Didot
 
-« Post-it » est une marque déposée de 3M. Ce projet n'a aucun lien avec 3M.
+"Post-it" is a registered trademark of 3M. This project is not affiliated with 3M.
