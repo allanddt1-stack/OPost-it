@@ -1,5 +1,5 @@
 #!/bin/bash
-# Compile Post-it depuis les sources et l'installe dans /Applications
+# Compile OPost-it depuis les sources et l'installe dans /Applications
 # (ou ~/Applications si /Applications n'est pas accessible en écriture).
 set -e
 cd "$(dirname "$0")"
@@ -13,11 +13,11 @@ fi
 
 BUILD="$(mktemp -d /tmp/postit.XXXXXX)"
 trap 'rm -rf "$BUILD"' EXIT
-APP="$BUILD/Post-it.app"
+APP="$BUILD/OPost-it.app"
 
 echo "→ Compilation… (30 s environ)"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-xcrun swiftc -O -swift-version 5 -target "$(uname -m)-apple-macos14.0" Sources/main.swift -o "$APP/Contents/MacOS/Post-it"
+xcrun swiftc -O -swift-version 5 -target "$(uname -m)-apple-macos14.0" Sources/main.swift -o "$APP/Contents/MacOS/OPost-it"
 cp Resources/Info.plist "$APP/Contents/Info.plist"
 
 echo "→ Icône…"
@@ -36,8 +36,9 @@ fi
 
 DEST="/Applications"
 [ -w "$DEST" ] || { DEST="$HOME/Applications"; mkdir -p "$DEST"; }
-killall Post-it 2>/dev/null && sleep 1 || true
-rm -rf "$DEST/Post-it.app"
+killall OPost-it 2>/dev/null && sleep 1 || true
+killall Post-it 2>/dev/null && sleep 1 || true   # ancien nom
+rm -rf "$DEST/OPost-it.app" "$DEST/Post-it.app"
 cp -R "$APP" "$DEST/"
-echo "✓ Installée dans $DEST/Post-it.app"
-open "$DEST/Post-it.app"
+echo "✓ Installée dans $DEST/OPost-it.app"
+open "$DEST/OPost-it.app"

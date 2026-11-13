@@ -1,6 +1,6 @@
-// Post-it — petite app de listes de tâches façon Stickies
+// OPost-it — petite app de listes de tâches façon Stickies
 // Chaque note = une fenêtre. Les données sont enregistrées dans
-// ~/Library/Application Support/Post-it/notes.json
+// ~/Library/Application Support/Post-it/notes.json (nom historique du dossier)
 
 import AppKit
 import SwiftUI
@@ -9,7 +9,7 @@ import EventKit
 
 // MARK: - Données
 
-/// Mode démo (`open -n -a Post-it --args --demo`) : notes fictives, rien n'est lu
+/// Mode démo (`open -n -a OPost-it --args --demo`) : notes fictives, rien n'est lu
 /// ni écrit dans tes vraies données, aucun lien avec Calendrier ou Rappels.
 let demoMode = CommandLine.arguments.contains("--demo")
 
@@ -135,8 +135,8 @@ final class CalendarSync {
             DispatchQueue.main.async {
                 // Après une autorisation, l'ancien EKEventStore ne voit souvent rien
                 if ok { self?.store = EKEventStore() }
-                else { self?.report("Post-it n'a pas accès aux \(name).",
-                                    "Autorise-le dans Réglages Système → Confidentialité et sécurité → \(name) (accès complet), puis reviens dans Post-it.",
+                else { self?.report("OPost-it n'a pas accès aux \(name).",
+                                    "Autorise-le dans Réglages Système → Confidentialité et sécurité → \(name) (accès complet), puis reviens dans OPost-it.",
                                     pane: pane) }
                 done(ok)
             }
@@ -180,7 +180,7 @@ final class CalendarSync {
             }
             let e = EKEvent(eventStore: store)
             e.calendar = cal
-            e.notes = "Créé depuis Post-it"
+            e.notes = "Créé depuis OPost-it"
             ev = e
         }
         guard let e = ev else { return nil }
@@ -229,7 +229,7 @@ final class CalendarSync {
         let allDay = it.allDay ?? false
         let comps: Set<Calendar.Component> = allDay ? [.year, .month, .day] : [.year, .month, .day, .hour, .minute]
         rem.title = plainTitle(it)
-        rem.notes = rangeText(it) + "\nCréé depuis Post-it"
+        rem.notes = rangeText(it) + "\nCréé depuis OPost-it"
         rem.dueDateComponents = Calendar.current.dateComponents(comps, from: due)
         rem.isCompleted = it.done
         rem.alarms?.forEach { rem.removeAlarm($0) }
@@ -766,7 +766,7 @@ final class Store {
 
     init() {
         let dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("Post-it", isDirectory: true)
+            .appendingPathComponent("Post-it", isDirectory: true)  // nom historique, ne pas changer
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true,
                                                  attributes: [.posixPermissions: 0o700])
         try? FileManager.default.setAttributes([.posixPermissions: 0o700], ofItemAtPath: dir.path)
@@ -837,7 +837,7 @@ final class Store {
             let a = NSAlert()
             a.alertStyle = .critical
             a.messageText = "Impossible d'enregistrer tes notes"
-            a.informativeText = "Tes dernières modifications risquent d'être perdues si tu quittes Post-it.\n\n\(error.localizedDescription)"
+            a.informativeText = "Tes dernières modifications risquent d'être perdues si tu quittes OPost-it.\n\n\(error.localizedDescription)"
             a.addButton(withTitle: "OK")
             a.runModal()
         }
@@ -1691,13 +1691,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     func buildMenu() {
         let main = NSMenu()
 
-        let appMenu = NSMenu(title: "Post-it")
-        appMenu.addItem(withTitle: "À propos de Post-it",
+        let appMenu = NSMenu(title: "OPost-it")
+        appMenu.addItem(withTitle: "À propos de OPost-it",
                         action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: "")
         appMenu.addItem(.separator())
-        appMenu.addItem(withTitle: "Masquer Post-it", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h")
+        appMenu.addItem(withTitle: "Masquer OPost-it", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h")
         appMenu.addItem(.separator())
-        appMenu.addItem(withTitle: "Quitter Post-it", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        appMenu.addItem(withTitle: "Quitter OPost-it", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         addMenu(main, appMenu)
 
         let file = NSMenu(title: "Fichier")
@@ -1746,7 +1746,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         let opItem = note.addItem(withTitle: "Transparence", action: nil, keyEquivalent: "")
         opItem.submenu = opMenu
         note.addItem(withTitle: "Synchroniser avec Calendrier", action: #selector(syncCalendar(_:)), keyEquivalent: "").target = self
-        note.addItem(withTitle: "Replier les notes épinglées hors de Post-it",
+        note.addItem(withTitle: "Replier les notes épinglées hors de OPost-it",
                      action: #selector(toggleAutoCollapse(_:)), keyEquivalent: "").target = self
         let ng = note.addItem(withTitle: "Nouvelle rubrique", action: #selector(newGroup(_:)), keyEquivalent: "n")
         ng.keyEquivalentModifierMask = [.command, .shift]

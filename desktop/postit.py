@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Post-it — notes de tâches façon Stickies, pour Windows et Linux (fonctionne aussi sur macOS).
+OPost-it — notes de tâches façon Stickies, pour Windows et Linux (fonctionne aussi sur macOS).
 
 Chaque note est une petite fenêtre colorée : tâches à cocher, rubriques, mise en forme
 Markdown, pomodoro, dates avec export vers n'importe quel agenda (.ics).
@@ -29,7 +29,8 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QDateTimeEdit, QDialog, 
                                QScrollArea, QSizeGrip, QSizePolicy, QStackedWidget,
                                QSystemTrayIcon, QToolButton, QVBoxLayout, QWidget)
 
-APP_NAME = "Post-it"
+APP_NAME = "Post-it"        # nom historique : sert au dossier de données, ne pas changer
+DISPLAY_NAME = "OPost-it"
 
 # Mode démo (python postit.py --demo) : notes fictives dans un dossier temporaire,
 # tes vraies notes ne sont ni lues ni modifiées, rien n'est exporté vers l'agenda.
@@ -239,7 +240,7 @@ def vevent(it: dict) -> list[str]:
              f"SEQUENCE:{it.get('icsSeq', 0)}",
              f"DTSTAMP:{_utc(dt.datetime.now())}",
              f"SUMMARY:{_ics_escape(md_to_plain(it['text']))}",
-             "DESCRIPTION:" + _ics_escape("Créé depuis Post-it")]
+             "DESCRIPTION:" + _ics_escape("Créé depuis OPost-it")]
     if it.get("allDay"):
         lines.append(f"DTSTART;VALUE=DATE:{start:%Y%m%d}")
         lines.append(f"DTEND;VALUE=DATE:{(end + dt.timedelta(days=1)):%Y%m%d}")
@@ -254,7 +255,7 @@ def vevent(it: dict) -> list[str]:
 
 
 def make_ics(items: list[dict]) -> str:
-    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Post-it//FR", "CALSCALE:GREGORIAN",
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//OPost-it//FR", "CALSCALE:GREGORIAN",
              "METHOD:PUBLISH"]
     for it in items:
         lines += vevent(it)
@@ -323,7 +324,7 @@ class Store:
                 os.replace(self.path, backup)
             except OSError:
                 backup = "(impossible de le déplacer)"
-            QMessageBox.warning(None, APP_NAME,
+            QMessageBox.warning(None, DISPLAY_NAME,
                                 "Le fichier des notes était illisible ; il a été mis de côté :\n"
                                 f"{backup}\n\n{e}")
             return []
@@ -346,7 +347,7 @@ class Store:
         except Exception as e:  # noqa: BLE001 — on prévient l'utilisateur quoi qu'il arrive
             if not self._error_shown:
                 self._error_shown = True
-                QMessageBox.critical(None, APP_NAME,
+                QMessageBox.critical(None, DISPLAY_NAME,
                                      "Impossible d'enregistrer tes notes.\n"
                                      "Tes dernières modifications risquent d'être perdues.\n\n" + str(e))
 
@@ -1034,7 +1035,7 @@ class NoteWindow(QWidget):
         a = m.addAction("Toujours au premier plan", self.toggle_floating)
         a.setCheckable(True)
         a.setChecked(bool(self.note["floating"]))
-        a = m.addAction("Replier les notes épinglées hors de Post-it", self.app.toggle_auto_collapse)
+        a = m.addAction("Replier les notes épinglées hors de OPost-it", self.app.toggle_auto_collapse)
         a.setCheckable(True)
         a.setChecked(self.app.auto_collapse)
         pomo = m.addMenu("Pomodoro")
@@ -1059,7 +1060,7 @@ class NoteWindow(QWidget):
         a.setEnabled(any(i["done"] for i in self.note["items"]))
         m.addSeparator()
         m.addAction("Supprimer la note", self.ask_close, QKeySequence("Ctrl+W"))
-        m.addAction("Quitter Post-it", self.app.quit)
+        m.addAction("Quitter OPost-it", self.app.quit)
 
     def set_color(self, c: int):
         self.note["color"] = c
@@ -1255,12 +1256,12 @@ class PostItApp:
         self.tray = None
         if QSystemTrayIcon.isSystemTrayAvailable():
             self.tray = QSystemTrayIcon(app_icon())
-            self.tray.setToolTip(APP_NAME)
+            self.tray.setToolTip(DISPLAY_NAME)
             m = QMenu()
             m.addAction("Nouvelle note", self.new_note)
             m.addAction("Tout afficher", self.show_all)
             m.addSeparator()
-            m.addAction("Quitter Post-it", self.quit)
+            m.addAction("Quitter OPost-it", self.quit)
             self.tray.setContextMenu(m)
             self.tray.activated.connect(lambda r: self.show_all()
                                         if r == QSystemTrayIcon.Trigger else None)
@@ -1377,7 +1378,7 @@ class PostItApp:
 
     def export_items(self, items: list[dict], open_after: bool, ask_path: bool = False):
         if DEMO:
-            self.notify(APP_NAME, "Mode démo : rien n'est exporté vers l'agenda.")
+            self.notify(DISPLAY_NAME, "Mode démo : rien n'est exporté vers l'agenda.")
             return
         items = [i for i in items if i.get("due")]
         if not items:
@@ -1400,11 +1401,11 @@ class PostItApp:
             with open(path, "w", encoding="utf-8", newline="") as f:
                 f.write(make_ics(items))
         except OSError as e:
-            QMessageBox.critical(None, APP_NAME, f"Impossible d'écrire le fichier d'agenda :\n{e}")
+            QMessageBox.critical(None, DISPLAY_NAME, f"Impossible d'écrire le fichier d'agenda :\n{e}")
             return
         if open_after or ask_path:
             if not QDesktopServices.openUrl(QUrl.fromLocalFile(path)):
-                QMessageBox.information(None, APP_NAME,
+                QMessageBox.information(None, DISPLAY_NAME,
                                         "Aucune application d'agenda n'a ouvert le fichier.\n"
                                         f"Tu peux l'importer à la main :\n{path}")
 
@@ -1414,6 +1415,7 @@ def main():
     QApplication.setOrganizationName(APP_NAME)
     QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     qapp = QApplication(sys.argv)
+    qapp.setApplicationDisplayName(DISPLAY_NAME)
     qapp.setWindowIcon(app_icon())
 
     if DEMO:
@@ -1426,7 +1428,7 @@ def main():
     lock = QLockFile(os.path.join(data_dir, "post-it.lock"))
     lock.setStaleLockTime(0)
     if not lock.tryLock(100):
-        QMessageBox.information(None, APP_NAME, "Post-it est déjà ouvert.")
+        QMessageBox.information(None, DISPLAY_NAME, "OPost-it est déjà ouvert.")
         return 0
 
     app = PostItApp(qapp)  # noqa: F841 — garde l'application en vie

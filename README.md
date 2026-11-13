@@ -1,4 +1,4 @@
-# Post-it
+# OPost-it
 
 **English** · [Français](README.fr.md)
 
@@ -8,7 +8,7 @@ A small *Stickies*-style to-do app for **macOS, Windows and Linux**. Each note i
 
 ### macOS
 
-![Post-it on macOS: a project with sections and dated tasks, a reading list and a pinned shopping list](docs/mac-notes.png)
+![OPost-it on macOS: a project with sections and dated tasks, a reading list and a pinned shopping list](docs/mac-notes.png)
 
 <p align="center">
   <img src="docs/mac-collapsed.png" alt="A pinned note collapsed into a thin bar while another app is in front" width="300">
@@ -17,7 +17,7 @@ A small *Stickies*-style to-do app for **macOS, Windows and Linux**. Each note i
 
 ### Windows and Linux
 
-![Post-it on Windows and Linux: three notes with sections, formatting and dates](docs/desktop-notes.png)
+![OPost-it on Windows and Linux: three notes with sections, formatting and dates](docs/desktop-notes.png)
 
 <p align="center">
   <img src="docs/desktop-collapsed.png" alt="A pinned note collapsed into a thin bar while another app is in front" width="310">
@@ -44,7 +44,7 @@ The repository holds two versions that share the same ideas but not the same cod
 - **Pomodoro** timer in every note, with adjustable work and break lengths.
 - **Dates**: any task can get a start and an end, or be marked "all day".
   - On macOS, it becomes either a **reminder to tick off** or an **appointment** in Calendar, synced both ways.
-  - On Windows and Linux, an `.ics` file opens in your default calendar app, with an alert. Post-it also shows a notification at the start time.
+  - On Windows and Linux, an `.ics` file opens in your default calendar app, with an alert. OPost-it also shows a notification at the start time.
 
 ### Shortcuts
 
@@ -74,17 +74,17 @@ The script builds the app, installs it in `/Applications` and launches it. The a
 
 ### Windows
 
-Download `Post-it.exe` from the repository's **Releases** page and run it. Windows SmartScreen may warn that the publisher is unknown, because the executable isn't signed: click "More info", then "Run anyway".
+Download `OPost-it.exe` from the repository's **Releases** page and run it. Windows SmartScreen may warn that the publisher is unknown, because the executable isn't signed: click "More info", then "Run anyway".
 
-To start it automatically: press `Win+R`, type `shell:startup`, and put a shortcut to `Post-it.exe` in that folder.
+To start it automatically: press `Win+R`, type `shell:startup`, and put a shortcut to `OPost-it.exe` in that folder.
 
 ### Linux
 
-Download `Post-it-Linux.tar.gz` from **Releases**, then:
+Download `OPost-it-Linux.tar.gz` from **Releases**, then:
 
 ```bash
-tar -xzf Post-it-Linux.tar.gz
-./install-linux.sh      # installs into ~/.local/bin and adds Post-it to the applications menu
+tar -xzf OPost-it-Linux.tar.gz
+./install-linux.sh      # installs into ~/.local/bin and adds OPost-it to the applications menu
 ```
 
 Some minimal distributions need `libxcb-cursor0` (Debian/Ubuntu: `sudo apt install libxcb-cursor0`).
@@ -102,12 +102,12 @@ python postit.py
 To try the app, or take screenshots without showing your real notes, start it with `--demo`. It opens three made-up notes. Your own data is neither read nor modified, and nothing is sent to your calendar.
 
 ```bash
-open -n -a Post-it --args --demo      # macOS (can run alongside your usual Post-it)
+open -n -a OPost-it --args --demo      # macOS (can run alongside your usual OPost-it)
 python postit.py --demo               # Windows / Linux, from the desktop/ folder
-Post-it.exe --demo                    # Windows, downloaded executable
+OPost-it.exe --demo                    # Windows, downloaded executable
 ```
 
-On macOS, [`macos/capture-demo.command`](macos/capture-demo.command) recreates this README's screenshots with a double-click: the app opens its demo notes, saves an image of each window to `~/Desktop/Post-it-captures`, then quits.
+On macOS, [`macos/capture-demo.command`](macos/capture-demo.command) recreates this README's screenshots with a double-click: the app opens its demo notes, saves an image of each window to `~/Desktop/OPost-it-captures`, then quits.
 
 ## Automatic builds
 

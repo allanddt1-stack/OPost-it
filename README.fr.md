@@ -1,4 +1,4 @@
-# Post-it
+# OPost-it
 
 [English](README.md) · **Français**
 
@@ -6,7 +6,7 @@ Petite app de listes de tâches façon *Stickies*, pour **macOS, Windows et Linu
 
 ### macOS
 
-![Post-it sur macOS : un projet avec des rubriques et des tâches datées, une liste de lectures et une liste de courses épinglée](docs/mac-notes.png)
+![OPost-it sur macOS : un projet avec des rubriques et des tâches datées, une liste de lectures et une liste de courses épinglée](docs/mac-notes.png)
 
 <p align="center">
   <img src="docs/mac-collapsed.png" alt="Note épinglée repliée en barre quand on passe à une autre application" width="300">
@@ -15,7 +15,7 @@ Petite app de listes de tâches façon *Stickies*, pour **macOS, Windows et Linu
 
 ### Windows et Linux
 
-![Post-it sous Windows et Linux : trois notes avec rubriques, mise en forme et dates](docs/desktop-notes.png)
+![OPost-it sous Windows et Linux : trois notes avec rubriques, mise en forme et dates](docs/desktop-notes.png)
 
 <p align="center">
   <img src="docs/desktop-collapsed.png" alt="Note épinglée repliée en barre quand on passe à une autre application" width="310">
@@ -42,7 +42,7 @@ Le dépôt contient deux versions, avec les mêmes idées mais un code différen
 - **Pomodoro** par note, avec durées de travail et de pause réglables.
 - **Dates** : chaque tâche peut recevoir un début et une fin, ou être marquée « toute la journée ».
   - Sur macOS, elle devient au choix un **rappel à cocher** ou un **rendez-vous** dans Calendrier, synchronisé dans les deux sens.
-  - Sur Windows et Linux, un fichier `.ics` s'ouvre dans ton agenda par défaut, avec une alerte. Post-it affiche aussi une notification à l'heure de début.
+  - Sur Windows et Linux, un fichier `.ics` s'ouvre dans ton agenda par défaut, avec une alerte. OPost-it affiche aussi une notification à l'heure de début.
 
 ### Raccourcis
 
@@ -72,17 +72,17 @@ Le script compile l'app, l'installe dans `/Applications` et la lance. Elle est s
 
 ### Windows
 
-Télécharge `Post-it.exe` dans la page **Releases** du dépôt, puis lance-le. Windows SmartScreen peut avertir que l'éditeur est inconnu, car l'exécutable n'est pas signé : clique sur « Informations complémentaires », puis « Exécuter quand même ».
+Télécharge `OPost-it.exe` dans la page **Releases** du dépôt, puis lance-le. Windows SmartScreen peut avertir que l'éditeur est inconnu, car l'exécutable n'est pas signé : clique sur « Informations complémentaires », puis « Exécuter quand même ».
 
-Pour le lancer au démarrage : `Win+R`, tape `shell:startup`, puis place un raccourci vers `Post-it.exe` dans ce dossier.
+Pour le lancer au démarrage : `Win+R`, tape `shell:startup`, puis place un raccourci vers `OPost-it.exe` dans ce dossier.
 
 ### Linux
 
-Télécharge `Post-it-Linux.tar.gz` dans **Releases**, puis :
+Télécharge `OPost-it-Linux.tar.gz` dans **Releases**, puis :
 
 ```bash
-tar -xzf Post-it-Linux.tar.gz
-./install-linux.sh      # installe dans ~/.local/bin et ajoute Post-it au menu des applications
+tar -xzf OPost-it-Linux.tar.gz
+./install-linux.sh      # installe dans ~/.local/bin et ajoute OPost-it au menu des applications
 ```
 
 Certaines distributions minimales ont besoin de `libxcb-cursor0` (Debian/Ubuntu : `sudo apt install libxcb-cursor0`).
@@ -100,12 +100,12 @@ python postit.py
 Pour essayer l'app ou faire des captures d'écran sans montrer tes vraies notes, lance-la avec `--demo`. Elle ouvre alors trois notes fictives. Tes données ne sont ni lues ni modifiées, et rien n'est envoyé à l'agenda.
 
 ```bash
-open -n -a Post-it --args --demo      # macOS (peut tourner à côté de ta Post-it habituelle)
+open -n -a OPost-it --args --demo      # macOS (peut tourner à côté de ta OPost-it habituelle)
 python postit.py --demo               # Windows / Linux, depuis le dossier desktop/
-Post-it.exe --demo                    # Windows, exécutable téléchargé
+OPost-it.exe --demo                    # Windows, exécutable téléchargé
 ```
 
-Sur macOS, [`macos/capture-demo.command`](macos/capture-demo.command) refait les captures de ce README d'un double-clic : l'app ouvre ses notes de démonstration, enregistre une image de chaque fenêtre dans `~/Desktop/Post-it-captures`, puis se ferme.
+Sur macOS, [`macos/capture-demo.command`](macos/capture-demo.command) refait les captures de ce README d'un double-clic : l'app ouvre ses notes de démonstration, enregistre une image de chaque fenêtre dans `~/Desktop/OPost-it-captures`, puis se ferme.
 
 ## Compilation automatique
 

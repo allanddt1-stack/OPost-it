@@ -1,4 +1,4 @@
-# Compile automatiquement Post-it pour Windows et Linux.
+# Compile automatiquement OPost-it pour Windows et Linux.
 # - À chaque envoi sur main : les exécutables sont disponibles dans l'onglet « Actions ».
 # - À chaque étiquette vX.Y (ex. git tag v1.0 && git push --tags) : ils sont publiés
 #   dans une « Release » téléchargeable depuis la page du dépôt.
@@ -20,12 +20,12 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            artifact: Post-it-Windows
-            file: dist/Post-it.exe
+            artifact: OPost-it-Windows
+            file: dist/OPost-it.exe
             sep: ";"
           - os: ubuntu-22.04   # glibc plus ancienne = compatible avec plus de distributions
-            artifact: Post-it-Linux
-            file: dist/Post-it
+            artifact: OPost-it-Linux
+            file: dist/OPost-it
             sep: ":"
     runs-on: ${{ matrix.os }}
     steps:
@@ -43,7 +43,7 @@ jobs:
       - name: Compilation
         shell: bash
         run: |
-          pyinstaller --noconfirm --onefile --windowed --name Post-it \
+          pyinstaller --noconfirm --onefile --windowed --name OPost-it \
             --icon desktop/assets/icon.png \
             --add-data "desktop/assets${{ matrix.sep }}assets" \
             desktop/postit.py
@@ -51,17 +51,17 @@ jobs:
       - name: Archive Linux (avec script d'installation)
         if: runner.os == 'Linux'
         run: |
-          chmod +x dist/Post-it
+          chmod +x dist/OPost-it
           cp desktop/install-linux.sh desktop/assets/icon.png dist/
-          tar -czf Post-it-Linux.tar.gz -C dist Post-it install-linux.sh icon.png
+          tar -czf OPost-it-Linux.tar.gz -C dist OPost-it install-linux.sh icon.png
 
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
-          path: ${{ runner.os == 'Linux' && 'Post-it-Linux.tar.gz' || matrix.file }}
+          path: ${{ runner.os == 'Linux' && 'OPost-it-Linux.tar.gz' || matrix.file }}
 
       - name: Publication (étiquettes vX.Y)
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ runner.os == 'Linux' && 'Post-it-Linux.tar.gz' || matrix.file }}
+          files: ${{ runner.os == 'Linux' && 'OPost-it-Linux.tar.gz' || matrix.file }}
