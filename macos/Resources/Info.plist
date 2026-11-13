@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleName</key><string>Post-it</string>
+  <key>CFBundleDisplayName</key><string>Post-it</string>
+  <key>CFBundleIdentifier</key><string>fr.didot.postit</string>
+  <key>CFBundleExecutable</key><string>Post-it</string>
+  <key>CFBundleIconFile</key><string>AppIcon</string>
+  <key>CFBundlePackageType</key><string>APPL</string>
+  <key>CFBundleShortVersionString</key><string>1.10</string>
+  <key>CFBundleVersion</key><string>14</string>
+  <key>CFBundleDevelopmentRegion</key><string>fr</string>
+  <key>LSMinimumSystemVersion</key><string>14.0</string>
+  <key>NSHighResolutionCapable</key><true/>
+  <key>NSRemindersUsageDescription</key><string>Post-it ajoute les tâches datées à tes rappels, qui s'affichent à cocher dans Calendrier.</string>
+  <key>NSRemindersFullAccessUsageDescription</key><string>Post-it ajoute les tâches datées à tes rappels et récupère ce que tu y coches ou déplaces.</string>
+  <key>NSCalendarsUsageDescription</key><string>Post-it ajoute les tâches datées à ton calendrier.</string>
+  <key>NSCalendarsFullAccessUsageDescription</key><string>Post-it ajoute les tâches datées à ton calendrier et récupère les changements de date que tu y fais.</string>
+</dict>
+</plist>

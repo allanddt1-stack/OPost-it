@@ -1,0 +1,67 @@
+# Compile automatiquement Post-it pour Windows et Linux.
+# - À chaque envoi sur main : les exécutables sont disponibles dans l'onglet « Actions ».
+# - À chaque étiquette vX.Y (ex. git tag v1.0 && git push --tags) : ils sont publiés
+#   dans une « Release » téléchargeable depuis la page du dépôt.
+name: Compilation
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            artifact: Post-it-Windows
+            file: dist/Post-it.exe
+            sep: ";"
+          - os: ubuntu-22.04   # glibc plus ancienne = compatible avec plus de distributions
+            artifact: Post-it-Linux
+            file: dist/Post-it
+            sep: ":"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r desktop/requirements.txt pyinstaller pillow
+
+      - name: Compilation
+        shell: bash
+        run: |
+          pyinstaller --noconfirm --onefile --windowed --name Post-it \
+            --icon desktop/assets/icon.png \
+            --add-data "desktop/assets${{ matrix.sep }}assets" \
+            desktop/postit.py
+
+      - name: Archive Linux (avec script d'installation)
+        if: runner.os == 'Linux'
+        run: |
+          chmod +x dist/Post-it
+          cp desktop/install-linux.sh desktop/assets/icon.png dist/
+          tar -czf Post-it-Linux.tar.gz -C dist Post-it install-linux.sh icon.png
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ runner.os == 'Linux' && 'Post-it-Linux.tar.gz' || matrix.file }}
+
+      - name: Publication (étiquettes vX.Y)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ runner.os == 'Linux' && 'Post-it-Linux.tar.gz' || matrix.file }}
