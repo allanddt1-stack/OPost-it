@@ -2,7 +2,7 @@
 
 **English** · [Français](README.fr.md)
 
-A small *Stickies*-style to-do app for **macOS, Windows and Linux**. Each note is a colored window on your desktop, with its own checklist, a pomodoro timer and a link to your calendar.
+**OPost-it is a free, open-source application** ([MIT license](LICENSE)): a small *Stickies*-style to-do app for **macOS, Windows and Linux**. Each note is a colored window on your desktop, with its own checklist, a pomodoro timer and a link to your calendar.
 
 > The app's interface is in French. Menus and buttons are short, and the shortcuts below work the same in any language.
 

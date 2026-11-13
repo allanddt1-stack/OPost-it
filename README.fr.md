@@ -2,7 +2,7 @@
 
 [English](README.md) · **Français**
 
-Petite app de listes de tâches façon *Stickies*, pour **macOS, Windows et Linux**. Chaque note est une fenêtre colorée posée sur le bureau, avec ses tâches à cocher, un minuteur pomodoro et un lien avec ton agenda.
+**OPost-it est une application libre et open source** ([licence MIT](LICENSE)) : une petite app de listes de tâches façon *Stickies*, pour **macOS, Windows et Linux**. Chaque note est une fenêtre colorée posée sur le bureau, avec ses tâches à cocher, un minuteur pomodoro et un lien avec ton agenda.
 
 ### macOS
 
