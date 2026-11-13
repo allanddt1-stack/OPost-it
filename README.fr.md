@@ -39,7 +39,11 @@ Le dépôt contient deux versions, avec les mêmes idées mais un code différen
 - **Transparence** réglable note par note (100 % à 40 %).
 - **Rubriques** : regroupe les tâches sous des intitulés repliables (raccourci, ou `# Nom` dans un champ d'ajout).
 - **Mise en forme Markdown** : `**gras**`, `*italique*`, `~~barré~~`, `` `code` ``, `[lien](https://…)`. Les adresses web collées deviennent cliquables. Par sécurité, seuls les liens `http`, `https` et `mailto` sont cliquables, et la vraie destination d'un lien s'affiche quand son texte ne la montre pas.
-- **Pomodoro** par note, avec durées de travail et de pause réglables.
+- **Minuteur pomodoro** dans chaque note, affiché en haut de la note (⏱ 25:00) :
+  - un clic lance ou met en pause une séance de travail ;
+  - à la fin, un son retentit et le minuteur passe à la pause (☕), puis revient au travail ;
+  - la durée du travail (15 à 60 min) et celle de la pause (5 à 20 min) se règlent note par note, avec la flèche à côté du minuteur sur macOS ou le menu ☰ sous Windows et Linux ;
+  - il continue de tourner et reste visible quand une note épinglée est repliée en barre.
 - **Dates** : chaque tâche peut recevoir un début et une fin, ou être marquée « toute la journée ».
   - Sur macOS, elle devient au choix un **rappel à cocher** ou un **rendez-vous** dans Calendrier, synchronisé dans les deux sens.
   - Sur Windows et Linux, un fichier `.ics` s'ouvre dans ton agenda par défaut, avec une alerte. OPost-it affiche aussi une notification à l'heure de début.

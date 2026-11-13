@@ -41,7 +41,11 @@ The repository holds two versions that share the same ideas but not the same cod
 - **Transparency**, set note by note (100% to 40%).
 - **Sections**: group tasks under collapsible headings (keyboard shortcut, or type `# Name` in an "add task" field).
 - **Markdown formatting**: `**bold**`, `*italic*`, `~~strikethrough~~`, `` `code` ``, `[link](https://…)`. Pasted web addresses become clickable. For safety, only `http`, `https` and `mailto` links can be clicked, and a link's real destination is shown next to it when its text doesn't reveal it.
-- **Pomodoro** timer in every note, with adjustable work and break lengths.
+- **Pomodoro timer** in every note, shown at the top of the note (⏱ 25:00):
+  - click it to start or pause a work session;
+  - when it ends, a sound plays and the timer switches to a break (☕), then back to work;
+  - work length (15 to 60 min) and break length (5 to 20 min) are set note by note, from the arrow next to the timer on macOS or the ☰ menu on Windows/Linux;
+  - it keeps running and stays visible when a pinned note is collapsed into a bar.
 - **Dates**: any task can get a start and an end, or be marked "all day".
   - On macOS, it becomes either a **reminder to tick off** or an **appointment** in Calendar, synced both ways.
   - On Windows and Linux, an `.ics` file opens in your default calendar app, with an alert. OPost-it also shows a notification at the start time.
